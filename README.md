@@ -60,15 +60,7 @@ After the setup is complete, you can run the FastAPI application with Docker and
 
 The project uses **Docker** for containerization. Docker allows you to run both the FastAPI app and PostgreSQL in isolated environments, ensuring consistency across different machines.
 
-### 1. Build the Docker Image
-
-To build the Docker image for the FastAPI app:
-
-```bash
-docker build -t fastapi-postgresql-app .
-```
-
-### 2. Run with Docker Compose
+###  Run with Docker Compose
 
 You can use **Docker Compose** to manage both the FastAPI app and PostgreSQL database together.
 
