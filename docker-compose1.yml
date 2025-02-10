@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: quizapplication
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    network_mode: "host"  # Uses the host network directly
+
+  quizapplication:
+    build: .
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app
+    network_mode: "host"  # Uses the host network directly
+
+volumes:
+  postgres_data:
