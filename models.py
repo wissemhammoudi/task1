@@ -4,7 +4,7 @@ from pydantic import BaseModel
 from typing import List
 
 # Pydantic model for choice data validation
-class ChoiceBase(BaseModel):
+class ChoiceBase(BaseModel): # najmou nektbou interface 
     choice_text: str  # Text content of the choice
     is_correct: bool  # Boolean indicating if this is the correct answer
 
