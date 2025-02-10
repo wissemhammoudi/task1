@@ -136,12 +136,6 @@ Delete a specific question by its ID.
 
 Update a specific question's text.
 
-**Example Request Body:**
-```json
-{
-  "question": "What is the capital of Germany?"
-}
-```
 
 **Response:**
 - **200 OK**: Question updated successfully.
