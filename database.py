@@ -6,7 +6,6 @@ from fastapi import  Depends
 from dotenv import load_dotenv
 import os
 
-vd
 load_dotenv()
 # Database URL for PostgreSQL connection
 # Format: postgresql://<username>:<password>@<host>:<port>/<database_name>
