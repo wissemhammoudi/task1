@@ -1,8 +1,8 @@
-from fastapi import APIRouter
+'''from fastapi import APIRouter
 from fastapi import  HTTPException
-from models import QuestionBase,Question,Choice
-from database import db_dependency
-
+from models import QuestionBase,Question,Choice,person_table,PersonBase
+from database import db_dependency,db_dependency_core
+from sqlalchemy import insert
 # Create router instance for question-related endpoints
 router = APIRouter( prefix="/question",tags=["questions"])
 
@@ -103,3 +103,4 @@ async def update_question(question_id: int, question: str, db: db_dependency):
     except SQLAlchemyError as e:
         db.rollback()  # Rollback in case of error
         raise HTTPException(status_code=500, detail="Database error: " + str(e))
+'''

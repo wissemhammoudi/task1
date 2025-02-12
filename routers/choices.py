@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+'''from fastapi import APIRouter
 from fastapi import HTTPException
 from models import Choice
 from database import db_dependency
@@ -23,4 +23,4 @@ async def get_choices(question_id: int, db: db_dependency):
     # Raise 404 if no choices found
     if not result:
         raise HTTPException(status_code=404, detail="Choise not found")
-    return result
+    return result'''

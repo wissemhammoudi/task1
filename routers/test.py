@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+'''from fastapi import APIRouter
 import asyncio
 import time
 import threading
@@ -30,3 +30,4 @@ async def endpoint3():
     # Running blocking I/O operation in a separate thread to prevent blocking event loop
     threading.Thread(target=blocking_function).start()
     return {"message": "Started blocking task in a separate thread."}
+'''
