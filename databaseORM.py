@@ -28,9 +28,8 @@ url = URL.create(
 engine = create_engine(url)
 
 # Create SessionLocal class to handle database sessions
-# autocommit=False: Changes must be explicitly committed
-# autoflush=False: Changes won't be automatically flushed to DB
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+SessionLocal = sessionmaker(engine)
 
 # Create base class for declarative models
 # Used as parent class for all SQLAlchemy models
@@ -46,12 +45,7 @@ def get_db():
         yield db
     finally:
         db.close()
-def get_db_core():
-    connection = engine.connect()
-    try:
-        yield connection
-    finally:
-        connection.close()
+
 
 # Type annotated database dependency for FastAPI
 # Used to inject database sessions into route handlers

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey,Boolean,MetaData,Table
+from sqlalchemy import Column, Integer, String, ForeignKey,MetaData,Table
 from pydantic import BaseModel,Field ,EmailStr
 from typing import Optional
 
