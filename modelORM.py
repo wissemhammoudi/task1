@@ -12,7 +12,7 @@ class LocationBase(BaseModel):
 class PersonBase(BaseModel):
     username: str = Field(..., max_length=15)
     email_address: EmailStr = Field(..., max_length=255)
-    location_id: Optional[int] = None  # Use location_id as an int, not a LocationBase object
+    location_id: Optional[int] = None  
 
 class Base(DeclarativeBase):
     pass
@@ -23,7 +23,8 @@ class Location(Base):
     address: Mapped[str] = mapped_column(String(255), nullable=False)
     city: Mapped[str] = mapped_column(String(100), nullable=False)
     
-    person: Mapped["Person"] = relationship(back_populates="location")
+    # Relationship where one location can have many people
+    people: Mapped[list["Person"]] = relationship("Person", back_populates="location")
 
     def __repr__(self) -> str:
         return f"Location(id={self.location_id!r}, address={self.address!r}, city={self.city!r})"
@@ -35,8 +36,8 @@ class Person(Base):
     email_address: Mapped[str] = mapped_column(String(255), nullable=False)
     location_id: Mapped[Optional[int]] = mapped_column(ForeignKey("Location.location_id"), nullable=True)
     
-    # Relationship with Location
-    location: Mapped[Optional["Location"]] = relationship(back_populates="person")
+    # Relationship where each person can have one location (or no location)
+    location: Mapped[Optional["Location"]] = relationship("Location", back_populates="people")
 
     def __repr__(self) -> str:
         return f"Person(id={self.person_id!r}, username={self.username!r}, email_address={self.email_address!r})"

@@ -36,13 +36,13 @@ class LocationBase(BaseModel):
 class PersonBase(BaseModel):
     username: str = Field(..., max_length=15)
     email_address: EmailStr = Field(..., max_length=255)
-    location_id: Optional[LocationBase] = None  # Location ID will be optional for person creation
+    location_id: Optional[int] = None  # Location ID will be optional for person creation
 
 
 
 # SQLAlchemy table for Person with location_id (ForeignKey to location_table)
 person_table = Table(
-    "person", metadata,
+    "Person", metadata,
     Column("person_id", Integer, primary_key=True, autoincrement=True),
     Column("username", String(15), nullable=False, unique=True),
     Column("email_address", String(255), nullable=False),
@@ -51,7 +51,7 @@ person_table = Table(
 
 # SQLAlchemy table for Location
 location_table = Table(
-    "location", metadata,
+    "Location", metadata,
     Column("location_id", Integer, primary_key=True, autoincrement=True),
     Column("address", String(255), nullable=False),
     Column("city", String(100), nullable=False),

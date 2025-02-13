@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, status
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy import insert, select, delete, update, text, func
 from models import person_table, PersonBase, location_table, LocationBase
@@ -6,7 +6,7 @@ from database import db_dependency_core
 
 router = APIRouter(prefix="/user", tags=["Users"])
 
-@router.post("/add")
+@router.post("/add",status_code=status.HTTP_201_CREATED)
 def insert_user(person: PersonBase, location: LocationBase, db: db_dependency_core):
     try:
         location_insert = insert(location_table).values(
@@ -29,8 +29,10 @@ def insert_user(person: PersonBase, location: LocationBase, db: db_dependency_co
         return {"message": "User created successfully"}
     except IntegrityError:
         db.rollback()
-        raise HTTPException(status_code=400, detail="User already exists or invalid data.")
+        db.rollback()
+        raise HTTPException(status_code=400, detail="Integrity constraint violated")
     except SQLAlchemyError as e:
+        db.rollback()
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
 
@@ -55,7 +57,7 @@ def get_users(db: db_dependency_core):
 @router.get('/emails')
 def get_user_emails(db: db_dependency_core):
     try:
-        s = select(person_table.c.email_address).order_by(person_table.c.email_address).limit(10)
+        s = select(person_table.c.email_address)
         results = db.execute(s).fetchall()
         return [row[0] for row in results]
     except SQLAlchemyError as e:
