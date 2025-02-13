@@ -69,7 +69,7 @@ def filter_emails(filter_value: str, db: db_dependency):
     except SQLAlchemyError as e:
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
 
-@router.delete("/delete-user/{id}")
+@router.delete("/delete-user/{id}",status_code=status.HTTP_204_NO_CONTENT)
 def delete_user(id: int, db: db_dependency):
     try:
         person = db.get(Person,id)
@@ -83,7 +83,7 @@ def delete_user(id: int, db: db_dependency):
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Database error: {str(e)}")
 
-@router.put("/update-email/{id}")
+@router.put("/update-email/{id}",status_code=status.HTTP_204_NO_CONTENT)
 def update_user_email(id: int, new_email: str, db: db_dependency):
     try:
         person = db.get(Person,id)
